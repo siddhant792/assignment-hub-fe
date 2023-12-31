@@ -1,14 +1,19 @@
 <template>
     <div class="navbar">
         <div class="logo">
-            <img src="../assets/logo.png" alt="Logo">
+            <router-link :to="{ name: 'my-assignments' }">
+                <img src="../assets/logo.png" alt="Logo" @click.stop>
+            </router-link>
+            
         </div>
         <div class="actions">
-            <img class="chat-icon" src="../assets/chat.png" alt="Chat" @click="openChat">
+            <router-link :to="{ name: 'chats' }">
+                <img class="chat-icon" src="../assets/chat.png" alt="Chat" @click.stop>
+            </router-link>
             <div class="profile" @click="toggleProfile">
                 <img class="profile-picture" src="../assets/profile.png" alt="Profile">
                 <div class="profile-options" v-if="isProfileOpen">
-                    <p @click="showMyPosts">Show My Posts</p>
+                    <p @click="MyPosts">My Posts</p>
                     <p @click="logout">Logout</p>
                 </div>
             </div>
@@ -25,16 +30,16 @@ export default {
     },
     methods: {
         openChat() {
-            
+
         },
         toggleProfile() {
             this.isProfileOpen = !this.isProfileOpen;
         },
-        showMyPosts() {
-            
+        MyPosts() {
+
         },
         logout() {
-            
+
         },
     },
 };
@@ -46,8 +51,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 0.7rem;
-    background-color: #ebebeb;
-    color: #ecf0f1;
+    background-color: #0a152f;
 }
 
 .logo img {
@@ -74,14 +78,15 @@ export default {
 .profile-picture {
     width: 40px;
     border-radius: 50%;
+    margin-right: 15px;
 }
 
 .profile-options {
     position: absolute;
     top: 50px;
-    width:max-content;
+    width: max-content;
     right: 0;
-    background-color: #7d8e9f;
+    background-color: #0a152f;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
@@ -98,6 +103,5 @@ export default {
     color: #ecf0f1;
     cursor: pointer;
 }
-
 </style>
   

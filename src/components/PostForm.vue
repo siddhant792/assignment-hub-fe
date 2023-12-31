@@ -73,7 +73,7 @@ select {
 }
 
 button {
-    background-color: #4caf50;
+    background-color: #0a152f;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -83,7 +83,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #273657;
 }
 
 .budget-input {
