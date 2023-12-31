@@ -1,8 +1,15 @@
 <template>
     <div class="post-list-container">
-        <h2>My Assignments</h2>
+        <h2>New Assignments</h2>
+        <div class="search-container">
+            <input v-model="searchTerm" type="text" placeholder="Search assignments..." class="search-input"
+                @input="filterPosts" />
+            <button class="search-button" @click="filterPosts">
+                <img src="../assets/search.png" alt="Search Icon" />
+            </button>
+        </div>
         <ul class="post-list">
-            <li v-for="post in userPosts" :key="post.id" class="post-item" @click="viewPostDetails(post.id)">
+            <li v-for="post in filteredPosts" :key="post.id" class="post-item" @click="viewPostDetails(post.id)">
                 <div class="post-info">
                     <h3>{{ post.title }}</h3>
                     <p class="description">{{ truncate(post.description) }}</p>
@@ -25,74 +32,58 @@ export default {
                     id: 1,
                     title: 'Vue.js Project',
                     description: 'Looking for a Vue.js developer to help with a project. Must have experience with Vuex and Vue Router.',
-                    createdAt: new Date('2023-01-15T10:30:00'), // Replace with actual creation date
-                    proposals: 5, // Number of proposals
+                    createdAt: new Date('2023-01-15T10:30:00'),
+                    proposals: 5,
                 },
                 {
                     id: 2,
                     title: 'Graphic Design Needed',
                     description: 'In need of a graphic designer to create a logo for my startup. Please submit your portfolio.',
-                    createdAt: new Date('2023-01-20T15:45:00'), // Replace with actual creation date
-                    proposals: 8, // Number of proposals
+                    createdAt: new Date('2023-01-20T15:45:00'),
+                    proposals: 8,
                 },
                 {
                     id: 3,
                     title: 'Python Programming Assignment',
                     description: 'Need assistance with a Python programming assignment. Deadline is in one week.',
-                    createdAt: new Date('2023-01-22T09:00:00'), // Replace with actual creation date
-                    proposals: 3, // Number of proposals
+                    createdAt: new Date('2023-01-22T09:00:00'),
+                    proposals: 3,
                 },
                 {
                     id: 1,
                     title: 'Vue.js Project',
                     description: 'Looking for a Vue.js developer to help with a project. Must have experience with Vuex and Vue Router.',
-                    createdAt: new Date('2023-01-15T10:30:00'), // Replace with actual creation date
-                    proposals: 5, // Number of proposals
+                    createdAt: new Date('2023-01-15T10:30:00'),
+                    proposals: 5,
                 },
                 {
                     id: 2,
                     title: 'Graphic Design Needed',
                     description: 'In need of a graphic designer to create a logo for my startup. Please submit your portfolio.',
-                    createdAt: new Date('2023-01-20T15:45:00'), // Replace with actual creation date
-                    proposals: 8, // Number of proposals
+                    createdAt: new Date('2023-01-20T15:45:00'),
+                    proposals: 8,
                 },
                 {
                     id: 3,
                     title: 'Python Programming Assignment',
                     description: 'Need assistance with a Python programming assignment. Deadline is in one week.',
-                    createdAt: new Date('2023-01-22T09:00:00'), // Replace with actual creation date
-                    proposals: 3, // Number of proposals
-                },
-                {
-                    id: 1,
-                    title: 'Vue.js Project',
-                    description: 'Looking for a Vue.js developer to help with a project. Must have experience with Vuex and Vue Router.',
-                    createdAt: new Date('2023-01-15T10:30:00'), // Replace with actual creation date
-                    proposals: 5, // Number of proposals
-                },
-                {
-                    id: 2,
-                    title: 'Graphic Design Needed',
-                    description: 'In need of a graphic designer to create a logo for my startup. Please submit your portfolio.',
-                    createdAt: new Date('2023-01-20T15:45:00'), // Replace with actual creation date
-                    proposals: 8, // Number of proposals
-                },
-                {
-                    id: 3,
-                    title: 'Python Programming Assignment',
-                    description: 'Need assistance with a Python programming assignment. Deadline is in one week.',
-                    createdAt: new Date('2023-01-22T09:00:00'), // Replace with actual creation date
-                    proposals: 3, // Number of proposals
+                    createdAt: new Date('2023-01-22T09:00:00'),
+                    proposals: 3,
                 },
                 // Add more posts as needed
             ],
+            searchTerm: '',
         };
+    },
+    computed: {
+        filteredPosts() {
+            return this.userPosts.filter(post =>
+                post.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+            );
+        },
     },
     methods: {
         viewPostDetails(postId) {
-            // Navigate to the detailed view of the post
-            // You can use Vue Router or any other navigation method
-            // Example: this.$router.push(`/post-details/${postId}`);
             console.log(postId);
         },
         truncate(text) {
@@ -103,6 +94,9 @@ export default {
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
             return new Intl.DateTimeFormat('en-US', options).format(date);
         },
+        filterPosts() {
+            // Automatically triggered by the search bar input
+        },
     },
 };
 </script>
@@ -111,6 +105,20 @@ export default {
 .post-list-container {
     max-width: 800px;
     margin: auto;
+    margin-top: 2rem;
+}
+
+.search-bar {
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
 }
 
 .post-list {
@@ -149,6 +157,41 @@ export default {
 .proposals-count {
     width: 30%;
     text-align: right;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    border-radius: 20px;
+}
+
+.search-button {
+    padding: 0.7rem 0.8rem;
+    background-color: #0a152f;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.search-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.search-button:hover {
+    background-color: #475c8b;
 }
 </style>
   

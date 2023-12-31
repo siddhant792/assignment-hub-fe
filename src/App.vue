@@ -1,7 +1,9 @@
 <template>
-  <NavBar class="nav-component"/>
+  <NavBar class="nav-component" />
   <div class="post-nav-component">
-    <router-view></router-view>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -18,7 +20,6 @@ export default {
 </script>
 
 <style>
-
 .nav-component {
   position: fixed;
   width: 100%;
@@ -31,6 +32,11 @@ export default {
   margin-top: 4.5rem;
   position: fixed;
   width: 100%;
+}
+
+.content {
+  overflow-y: auto;
+  height: 93vh;
 }
 
 #app {

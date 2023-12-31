@@ -3,6 +3,9 @@ import PostForm from '@/components/PostForm.vue';
 import UserPosts from '@/components/UserPosts.vue'
 import PostDetails from '@/components/PostDetails.vue'
 import UserChat from '@/components/UserChat.vue'
+import UserAuthentication from '@/components/UserAuthentication.vue'
+import AssignmentFeed from '@/components/AssignmentFeed.vue'
+import SendProposal from '@/components/SendProposal.vue'
 
 const routes = [
     {
@@ -24,6 +27,21 @@ const routes = [
         path: '/chats',
         name: 'chats',
         component: UserChat,
+    },
+    {
+        path: '/auth',
+        name: 'auth',
+        component: UserAuthentication,
+    },
+    {
+        path: '/home',
+        name: 'home',
+        component: AssignmentFeed,
+    },
+    {
+        path: '/assignment/:id/add-proposal',
+        name: 'add-proposal',
+        component: SendProposal,
     },
 ];
 
